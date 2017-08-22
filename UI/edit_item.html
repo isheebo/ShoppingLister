@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Edit List</title>
+    <title>Edit Item </title>
+
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-
     <nav class="navbar navbar-inverse fixed-top bg-faded navbar-toggleable-sm ">
         <div class="container">
             <h1 class="navbar-brand m-o align-content-end mr-auto">ShoppingLister</h1>
@@ -25,7 +25,7 @@
     <div class="container">
         <div class="row">
             <div class="container new_list_background card col-6">
-                <h2 class="text-capitalize card-title mt-1">Edit Shopping List</h2>
+                <h2 class="text-capitalize card-title mt-1">Edit Item</h2>
                 <div class="row">
                     <div class="col">
                         <!-- List item content-->
@@ -37,14 +37,21 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="notify_date">NotifyDate</label>
+                            <label class="control-label col-sm-2" for="quantity">Quantity</label>
                             <div class="col">
-                                <input type="date" id="notify_date" name="notify_date" required>
+                                <input class="form-control" id="quantity">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="price">Price</label>
+                            <div class="col">
+                                <input class="form-control" id="price">
                             </div>
                         </div>
                         <div class="form-group">
                             <div>
-                                <input class="btn btn-success" type="submit" value="Save">
+                                <button class="btn btn-success">Save</button>
                             </div>
                         </div>
                     </div>
