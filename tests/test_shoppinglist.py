@@ -60,3 +60,27 @@ class TestShoppingList(unittest.TestCase):
 
         no_item = clothes.get_item("HDR71S")
         self.assertFalse(no_item, "No item available: supposed to return None")
+
+    def test_edit_item(self):
+        self.shoppinglist.add_item(Item("TY82HS", "Cabbages", 2000, 4))
+        self.assertEqual(len(self.shoppinglist.items), 1,
+                         "One item in the items dictionary")
+        self.assertTrue(self.shoppinglist.edit_item(
+            "TY82HS", "Spinach", 5, 2300, False))
+        self.assertEqual(len(self.shoppinglist.items), 1,
+                         "One item in the items dictionary")
+
+        self.assertEqual(
+            self.shoppinglist.items["TY82HS"].name, "Spinach", "Item with ID TY82HS must be cabbages")
+        self.assertEqual(self.shoppinglist.items["TY82HS"].price,
+                         2300, "Item with ID TY82HS must have a price of 2300")
+        self.assertEqual(
+            self.shoppinglist.items["TY82HS"].quantity, 5, "Item must have quantity 5")
+
+        # For a non-existent ID
+        self.assertFalse(self.shoppinglist.edit_item(
+            "TY8HS", "Spinach", 4, 2300, False))
+
+
+if __name__ == "__main__":
+    unittest.main()
