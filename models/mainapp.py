@@ -40,3 +40,6 @@ class App:
                 f"user with email address {email} has not yet been registered")
             return None
         return self.registered_users[email]
+
+    def generate_ID(self):
+        return "".join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(10))
