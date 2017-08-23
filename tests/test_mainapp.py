@@ -73,3 +73,7 @@ class MainAppTest(unittest.TestCase):
         # Returns None when we try to get an unregistered user
         first_user = self.app.get_user("kad@gmail.com")
         self.assertFalse(first_user)
+
+
+if __name__ == "__main__":
+    unittest.main()
