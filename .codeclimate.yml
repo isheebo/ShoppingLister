@@ -4,3 +4,4 @@ engines:
     config:
       languages:
       - python:
+          python_version: 3
