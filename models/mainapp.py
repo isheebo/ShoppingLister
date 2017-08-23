@@ -27,3 +27,16 @@ class App:
             if user.password == password:
                 return True
         return False
+
+    def get_user(self, email):
+        """
+        :param email -- a valid email Address
+        get_user: searches the registered_users dictionary for the specified
+        email
+        :returns a user: User
+        """
+        if email not in self.registered_users:
+            print(
+                f"user with email address {email} has not yet been registered")
+            return None
+        return self.registered_users[email]
