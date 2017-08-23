@@ -11,3 +11,15 @@ class ShoppingList:
         self.item_names = dict()  # mapping item names and their IDs (ID: name)
         self.date_created = datetime.now().strftime("%Y-%m-%d %H:%M")
         self.date_modified = self.date_created
+
+    def add_item(self, item):
+        """ add_item adds an item to the shopping list. No duplicates allowed
+        :returns True if item has been added, False otherwise
+        """
+        if item.item_id in self.items.keys() or item.name in self.item_names.values():
+            return False
+
+        self.items[item.item_id] = item
+        self.item_names[item.item_id] = item.name.title()
+        self.date_modified = datetime.now().strftime("%Y-%m-%d %H:%M")
+        return True
