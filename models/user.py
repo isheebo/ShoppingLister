@@ -32,3 +32,15 @@ class User:
             del self.shoppinglist_names[list_id]
             is_deleted = True
         return is_deleted
+
+    def edit_shoppinglist(self, list_id, new_name, notify_date):
+        """ Edits the name and the notify_date of an already existing shopping list
+        :returns True if the edit is successful. False otherwise
+        """
+        if list_id in self.shoppinglists:
+            old_list = self.shoppinglists[list_id]
+            old_list.name = new_name
+            old_list.notify_date = notify_date
+            old_list.date_modified = datetime.now().strftime("%Y-%m-%d %H:%M")
+            return True
+        return False
