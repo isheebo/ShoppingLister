@@ -1,7 +1,6 @@
-{% extends "base.html" %}
-{% block title %}Items {% endblock %}
-{% block content %}
-    <body>
+{% extends "base.html" %} {% block title %}Items {% endblock %} {% block content %}
+
+<body>
 
     <nav class="navbar navbar-inverse fixed-top bg-faded navbar-toggleable-sm ">
         <div class="container">
@@ -10,7 +9,7 @@
             </a>
             <div class="navbar-nav ">
                 <a class="nav-item nav-link" href="#">{{ user.email }}</a>
-                <a class="nav-item nav-link" href="{{ url_for("lister.logout") }}"> Log Out </a>
+                <a class="nav-item nav-link" href="{{ url_for(" lister.logout ") }}"> Log Out </a>
             </div>
         </div>
     </nav>
@@ -25,16 +24,11 @@
             </div>
         </div>
 
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-success alert-dismissable offset-3 col-6">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+        <div class="alert alert-success alert-dismissable offset-3 col-6">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a> {{ message }}
+        </div>
+        {% endfor %} {% endif %} {% endwith %}
 
         <!-- Modal -->
         <div id="myModal" class="modal fade" role="dialog">
@@ -51,9 +45,7 @@
 
                     <!-- modal body-->
                     <div class="modal-body">
-                        <form class="form-horizontal"
-                              action="{{ url_for("lister.add_item", list_id=shoppinglist.list_id) }}"
-                              method="post">
+                        <form class="form-horizontal" action="{{ url_for(" lister.add_item ", list_id=shoppinglist.list_id) }}" method="post">
                             <div class="row">
                                 <div class="col">
 
@@ -67,8 +59,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-sm-2" for="quantity">Quantity</label>
                                         <div class="col">
-                                            <input class="form-control" id="quantity" name="quantity"
-                                                   required>
+                                            <input class="form-control" id="quantity" name="quantity" required>
                                         </div>
                                     </div>
 
@@ -93,40 +84,34 @@
 
         <!-- Table displaying list items-->
         {% if shoppinglist %}
-            <table class="table table-hover">
+        <table class="table table-hover">
 
-                <thead>
+            <thead>
                 <tr>
                     <th>Item Name</th>
                     <th>Quantity</th>
                     <th>Price</th>
                     <th colspan="2" class="text-md-center">Action</th>
                 </tr>
-                </thead>
+            </thead>
 
-                <tbody>
+            <tbody>
                 {% for id, item in shoppinglist.items.items() %}
-                    <tr>
-                        <td>{{ item.name }}</td>
-                        <td>{{ item.quantity }}</td>
-                        <td>{{ item.price }}</td>
-                        <td class="text-right"><a
-                                href="{{ url_for('lister.edit_item', list_id=shoppinglist.list_id, item_id=item.item_id) }}"
-                                class="btn btn-link">edit</a></td>
-                        <td class="text-right"><a
-                                href="{{ url_for('lister.delete_item', list_id=shoppinglist.list_id, item_id=item.item_id) }}"
-                                class="btn btn-link">edit</a></td>
-                    </tr>
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.price }}</td>
+                    <td class="text-right"><a href="{{ url_for('lister.edit_item', list_id=shoppinglist.list_id, item_id=item.item_id) }}" class="btn btn-link">edit</a></td>
+                    <td class="text-right"><a href="{{ url_for('lister.delete_item', list_id=shoppinglist.list_id, item_id=item.item_id) }}" class="btn btn-link">delete</a></td>
+                </tr>
                 {% endfor %}
-                </tbody>
-            </table>
+            </tbody>
+        </table>
 
         {% else %}
 
-            <h1 class="text-center d-flex align-item-center justify-content-center">There are no items
-                in {{ shoppinglist.name }} </h1>
+        <h1 class="text-center d-flex align-item-center justify-content-center">There are no items in {{ shoppinglist.name }} </h1>
         {% endif %}
     </div>
-    </body>
+</body>
 {% endblock %}
-
