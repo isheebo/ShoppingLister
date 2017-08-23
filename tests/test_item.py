@@ -20,3 +20,8 @@ class TestItem(unittest.TestCase):
         self.assertEqual(self.item.price, 200, "Price must be 200")
         self.item.price = 120
         self.assertEqual(self.item.price, 120, "Price must now be 120")
+
+    def test_quantity_of_item(self):
+        self.assertEqual(self.item.quantity, 4, "Quantity must be 4")
+        self.item.quantity = 6
+        self.assertEqual(self.item.quantity, 6, "Quantity must now be 6")
