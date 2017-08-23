@@ -173,3 +173,31 @@ def add_item(list_id):
         flash(
             f"An item with name {name} already exists. Try editing it's price and quantity")
     return render_template("items.html", user=user, shoppinglist=shoppinglist)
+
+
+@lister.route("/edit/list/item/<list_id>/<item_id>", methods=["GET", "POST"])
+def edit_item(list_id, item_id):
+    """ edit_item defines routes for editing an item within a list """
+
+    if not session.get("logged_in"):
+        flash("Please first login!")
+        return redirect(url_for("lister.login"))
+    user = app_instance.get_user(session["email"])
+    shoppinglist = user.get_shoppinglist(list_id)
+    item = shoppinglist.get_item(item_id)
+    if not shoppinglist or not item:
+        flash(f"Item doesn't exist on the mentioned shopping list")
+        return redirect(url_for("lister.items", list_id=list_id))
+
+    if request.method == "POST":
+        name = request.form["name"]
+        quantity = request.form["quantity"]
+        price = request.form["price"]
+        if name and quantity and price:
+            if shoppinglist.edit_item(item_id, name, quantity, price):
+                flash(f"Item has successfully been edited")
+                return redirect(url_for("lister.items", list_id=list_id))
+            flash("Failed to edit item")
+        else:
+            flash("All inputs required, recheck your inputs and try again!")
+    return render_template("edit_items.html", user=user, shoppinglist=shoppinglist, item=item)
