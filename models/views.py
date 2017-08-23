@@ -201,3 +201,28 @@ def edit_item(list_id, item_id):
         else:
             flash("All inputs required, recheck your inputs and try again!")
     return render_template("edit_items.html", user=user, shoppinglist=shoppinglist, item=item)
+
+
+@lister.route("/delete/list/item/<list_id>/<item_id>", methods=["GET", "POST"])
+def delete_item(list_id, item_id):
+    """ Defines routes for removing an item from a specified list """
+    error = None
+
+    if not session.get("logged_in"):
+        flash("Please first login!")
+        return redirect(url_for("lister.login"))
+
+    user = app_instance.get_user(session["email"])
+    shoppinglist = user.get_shoppinglist(list_id)
+    item = shoppinglist.get_item(item_id)
+
+    if not item or not shoppinglist:
+        flash("Item doesn't exist on the shopping list with that name")
+        return redirect(url_for("lister.items", list_id=list_id))
+
+    if request.method == "POST":
+        if shoppinglist.remove_item(item_id):
+            flash("Item has successfully been deleted")
+            return redirect(url_for("lister.items", list_id=shoppinglist.list_id))
+        error = "Item has not been deleted"
+    return render_template("delete_item.html", error=error, user=user, shoppinglist=shoppinglist, item=item)
