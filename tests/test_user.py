@@ -26,3 +26,14 @@ class TestUser(unittest.TestCase):
             "date must be 2017-08-27")
         self.assertEqual(len(self.user.shoppinglists), 1,
                          "One item created on the user profile")
+
+    def test_user_delete_shopping_list(self):
+        self.assertEqual(len(self.user.shoppinglists), 0,
+                         "Length must be zero. No items added.Yet!")
+        self.user.create_shoppinglist(ShoppingList(
+            "HS86HF", "Vegetables", "2017-08-27"))
+        self.assertEqual(len(self.user.shoppinglists), 1,
+                         "One shopping list added on user account")
+        self.assertTrue(self.user.delete_shoppinglist("HS86HF"))
+        self.assertEqual(len(self.user.shoppinglists), 0,
+                         "Length must be zero. The item has been deleted")
