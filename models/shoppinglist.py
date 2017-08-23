@@ -44,3 +44,22 @@ class ShoppingList:
         if item_id in self.items:
             return self.items[item_id]
         return None
+
+    def edit_item(self, item_id, new_name, quantity, price):
+        """ Edits an item's fields by using its name """
+
+        for id, old_name in self.item_names.items():
+            """If we are have beans, say on a particular shopping list, 
+            we shouldn't edit another item to be called beans too. Just to keep the list clean"""
+            if old_name == new_name.title() and item_id != id:
+                return False
+
+        has_been_edited = False
+        if item_id in self.items:
+            old_item = self.items[item_id]
+            old_item.name = new_name.title()
+            old_item.quantity = quantity
+            old_item.price = price
+            has_been_edited = True
+            self.date_modified = datetime.now().strftime("%Y-%m-%d %H:%M")
+        return has_been_edited
