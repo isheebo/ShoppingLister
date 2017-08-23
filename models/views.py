@@ -114,3 +114,23 @@ def edit_list(list_id):
                 return redirect(url_for("lister.shopping_list"))
             flash("Unable to edit list")
     return render_template("edit_list.html", user=user, shoppinglist=shoppinglist)
+
+
+@lister.route("/delete/list/<list_id>", methods=["GET", "POST"])
+def delete_list(list_id):
+    """delete_list defines routes for deleting a
+    shopping list from a specified user account """
+    error = None
+    if not session.get("logged_in"):
+        flash("Please first login!")
+        return redirect(url_for("lister.login"))
+    user = app_instance.get_user(session["email"])
+    shoppinglist = user.get_shoppinglist(list_id)
+    if not shoppinglist:
+        return redirect(url_for("lister.shopping_list"))
+    if request.method == "POST":
+        if user.delete_shoppinglist(list_id):
+            flash(f"List with {list_id} has been deleted successfully")
+            return redirect(url_for("lister.delete_list", list_id=shoppinglist.list_id))
+        error = f"Failed to delete {list_id}"
+    return render_template("delete_list.html", error=error, shoppinglist=shoppinglist, user=user)
