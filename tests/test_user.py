@@ -68,3 +68,24 @@ class TestUser(unittest.TestCase):
             "HshfnaA", "Beans", "2018-01-01"))
         self.assertEqual(self.user.shoppinglists["HKUA452SA"].name,
                          "Clothes", "The name never changed from Clothes")
+
+    def test_get_shoppinglist(self):
+        self.user.create_shoppinglist(ShoppingList(
+            "HDYIAM728", "Clothes", "2018-09-12"))
+        self.assertEqual(len(self.user.shoppinglists), 1,
+                         "Length of shopping list on user account  is 1")
+        self.user.create_shoppinglist(ShoppingList(
+            "HS6742SF", "Vegetables", "2018-10-23"))
+        self.assertEqual(len(self.user.shoppinglists), 2,
+                         "Length of shopping lists on user account is 2")
+
+        shoppinglist = self.user.get_shoppinglist("HS6742SF")
+        self.assertEqual(shoppinglist.name, "Vegetables")
+
+        # if user has no shoppinglist with that name
+        new_shopping_list = self.user.get_shoppinglist("HSafd42SF")
+        self.assertFalse(new_shopping_list)  # new_shopping_list = None
+
+
+if __name__ == "__main__":
+    unittest.main()
