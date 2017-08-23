@@ -22,3 +22,27 @@ class MainAppTest(unittest.TestCase):
             User("Muhwezi Allan", "muhallan@gmail.com", "password")))
         self.assertEqual(len(self.app.registered_users), 2,
                          "2nd user added,hence number of registered users = 2")
+
+    def test_login(self):
+        """A person logs in only and only if they are a registered
+        app user. Otherwise they can't be logged in"""
+
+        # Because the email is not registered, the user cannot login
+        self.assertFalse(self.app.login("kedgar751@gmail.com", "password"))
+
+        # register the user and confirm that it is True
+        self.assertTrue(self.app.register(
+            User("isheebo", "kedgar751@gmail.com", "password")))
+
+        # Now retry logging in. It should return True
+        self.assertTrue(self.app.login("kedgar751@gmail.com", "password"))
+
+        self.assertEqual(len(self.app.registered_users),
+                         1, "One user has been registered")
+
+        # Login cannot happen with a wrong password. the function should return
+        # False
+        self.assertFalse(self.app.login("kedgar751@gmail.com", "Kanyesigye"))
+
+        # Login cannot happen with an unregistered email.
+        self.assertFalse(self.app.login("muhallan@gmail.com", "password"))
