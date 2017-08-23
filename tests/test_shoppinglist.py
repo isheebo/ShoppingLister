@@ -66,7 +66,7 @@ class TestShoppingList(unittest.TestCase):
         self.assertEqual(len(self.shoppinglist.items), 1,
                          "One item in the items dictionary")
         self.assertTrue(self.shoppinglist.edit_item(
-            "TY82HS", "Spinach", 5, 2300, False))
+            "TY82HS", "Spinach", 5, 2300))
         self.assertEqual(len(self.shoppinglist.items), 1,
                          "One item in the items dictionary")
 
@@ -79,7 +79,7 @@ class TestShoppingList(unittest.TestCase):
 
         # For a non-existent ID
         self.assertFalse(self.shoppinglist.edit_item(
-            "TY8HS", "Spinach", 4, 2300, False))
+            "TY8HS", "Spinach", 4, 2300))
 
 
 if __name__ == "__main__":
