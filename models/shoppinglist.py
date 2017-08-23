@@ -23,3 +23,18 @@ class ShoppingList:
         self.item_names[item.item_id] = item.name.title()
         self.date_modified = datetime.now().strftime("%Y-%m-%d %H:%M")
         return True
+
+    def remove_item(self, item_id):
+        """ Deletes an item from the ShoppingList:
+        :param item_id string
+        :returns True if item_id exists and has been removed
+        False if item with that id hasn't been found
+        """
+        removed = False
+        if item_id in self.items:
+            del self.items[item_id]
+            del self.item_names[item_id]
+            self.date_modified = datetime.now().strftime("%Y-%m-%d %H:%M")
+            removed = True
+            self.date_modified = datetime.now().strftime("%Y-%m-%d %H:%M")
+        return removed
