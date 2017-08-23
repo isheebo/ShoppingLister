@@ -38,3 +38,9 @@ class ShoppingList:
             removed = True
             self.date_modified = datetime.now().strftime("%Y-%m-%d %H:%M")
         return removed
+
+    def get_item(self, item_id):
+        """ Returns an item specified by item_id"""
+        if item_id in self.items:
+            return self.items[item_id]
+        return None
