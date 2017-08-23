@@ -17,3 +17,13 @@ class App:
             self.registered_users[user.email] = user
             has_been_registered = True
         return has_been_registered
+
+    def login(self, email, password):
+        """ Login tries to login a user with a specified email and password.
+        :returns True on success and False otherwise
+         """
+        if email in self.registered_users:
+            user = self.registered_users[email]
+            if user.password == password:
+                return True
+        return False
