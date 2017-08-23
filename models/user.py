@@ -44,3 +44,12 @@ class User:
             old_list.date_modified = datetime.now().strftime("%Y-%m-%d %H:%M")
             return True
         return False
+
+    def get_shoppinglist(self, list_id):
+        """ Searches a specified user profile for the specified ShoppingList ID.
+        :returns ShoppingList if list_id exists else None
+        """
+        if list_id in self.shoppinglists:
+            # returns a list of Item objects
+            return self.shoppinglists[list_id]
+        return None
