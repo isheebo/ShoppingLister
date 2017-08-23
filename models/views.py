@@ -226,3 +226,11 @@ def delete_item(list_id, item_id):
             return redirect(url_for("lister.items", list_id=shoppinglist.list_id))
         error = "Item has not been deleted"
     return render_template("delete_item.html", error=error, user=user, shoppinglist=shoppinglist, item=item)
+
+
+@lister.route("/logout")
+def logout():
+    if session.get("logged_in"):
+        session["logged_in"] = False
+        del session["email"]
+    return redirect(url_for("lister.signup"))
