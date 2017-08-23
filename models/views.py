@@ -134,3 +134,17 @@ def delete_list(list_id):
             return redirect(url_for("lister.delete_list", list_id=shoppinglist.list_id))
         error = f"Failed to delete {list_id}"
     return render_template("delete_list.html", error=error, shoppinglist=shoppinglist, user=user)
+
+
+@lister.route("/view/list/items/<list_id>", methods=["POST", "GET"])
+def items(list_id):
+    """ Handles the display of all items with in a particular list"""
+    if not session.get("logged_in"):
+        flash("Please first login!")
+        return redirect(url_for("lister.login"))
+    user = app_instance.get_user(session["email"])
+    shoppinglist = user.get_shoppinglist(
+        list_id)  # returns a list of shop_items
+    if not shoppinglist:
+        return redirect(url_for("lister.shopping_list"))
+    return render_template("items.html", user=user, shoppinglist=shoppinglist)
