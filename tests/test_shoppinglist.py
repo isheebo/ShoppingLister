@@ -28,3 +28,20 @@ class TestShoppingList(unittest.TestCase):
         self.shoppinglist.add_item(Item("4553", "Carrots", 4000, 10))
         self.assertEqual(len(self.shoppinglist.items), 2,
                          "The items in the list must now be two")
+
+    def test_remove_item_from_shoppinglist(self):
+        self.shoppinglist.add_item(Item("4255", "Cabbages", 2000, 4))
+        self.shoppinglist.add_item(Item("3902", "Carrots", 4000, 10))
+        self.assertEqual(len(self.shoppinglist.items), 2,
+                         "There must be two items in the list")
+        self.shoppinglist.remove_item("3902")
+        self.assertEqual(len(self.shoppinglist.items), 1,
+                         "There must be one item left in the list")
+
+        # test remove item from wrong shoppinglist
+        clothes = ShoppingList("ab452", "Clothes", "2017-09-01")
+        clothes.add_item(Item("46272", "Jeans", 15000, 3))
+        self.assertEqual(len(clothes.items), 1, "One item in clothes")
+        clothes.add_item(Item("3214", "Shirts", 30000, 3))
+        self.assertEqual(len(clothes.items), 2, "Two item in clothes")
+        self.shoppinglist.remove_item("3214")
