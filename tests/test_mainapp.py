@@ -46,3 +46,30 @@ class MainAppTest(unittest.TestCase):
 
         # Login cannot happen with an unregistered email.
         self.assertFalse(self.app.login("muhallan@gmail.com", "password"))
+
+    def test_get_user(self):
+        self.app.register(
+            User("Kanyesigye Edgar", "Kedgar751@gmail.com", "password"))
+        self.app.register(
+            User("Muhwezi Allan", "muhallan@gmail.com", "muhallan"))
+
+        self.assertEqual(len(self.app.registered_users), 2, "Two users added")
+
+        self.app.register(
+            User("Kanyesigye Edgar", "Kedgar751@gmail.com", "password"))
+
+        # It doesn't allow a user to be registered twice
+        self.assertEqual(len(self.app.registered_users), 2,
+                         "Two users added: no duplicates allowed")
+
+        # getting registered user
+        user = self.app.get_user("muhallan@gmail.com")
+        self.assertTrue(user)
+        self.assertEqual(user.name, "Muhwezi Allan",
+                         "user with email muhallan@gmail.com is Muhwezi Allan")
+        self.assertEqual(user.password, "muhallan",
+                         "Password for muhallan@gmail.com is muhallan")
+
+        # Returns None when we try to get an unregistered user
+        first_user = self.app.get_user("kad@gmail.com")
+        self.assertFalse(first_user)
