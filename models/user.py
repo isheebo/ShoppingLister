@@ -21,3 +21,14 @@ class User:
         self.shoppinglists[shop_list.list_id] = shop_list
         self.shoppinglist_names[shop_list.list_id] = shop_list.name
         return True
+
+    def delete_shoppinglist(self, list_id):
+        """ Deletes a shopping list from a specified user profile.
+        :param list_id is the id of the ShoppingList to be deleted """
+
+        is_deleted = False
+        if list_id in self.shoppinglists:
+            del self.shoppinglists[list_id]
+            del self.shoppinglist_names[list_id]
+            is_deleted = True
+        return is_deleted
