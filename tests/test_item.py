@@ -15,3 +15,8 @@ class TestItem(unittest.TestCase):
         self.item.name = "Carrots"
         self.assertEqual(self.item.name, "Carrots",
                          "name of the item has now changed to Carrots")
+
+    def test_price_of_item(self):
+        self.assertEqual(self.item.price, 200, "Price must be 200")
+        self.item.price = 120
+        self.assertEqual(self.item.price, 120, "Price must now be 120")
