@@ -37,3 +37,32 @@ class TestUser(unittest.TestCase):
         self.assertTrue(self.user.delete_shoppinglist("HS86HF"))
         self.assertEqual(len(self.user.shoppinglists), 0,
                          "Length must be zero. The item has been deleted")
+
+    def test_edit_shopping_list(self):
+        self.user.create_shoppinglist(ShoppingList(
+            "HKUA452SA", "Vegetables", "2017-08-27"))
+        self.assertEqual(self.user.shoppinglists["HKUA452SA"].name,
+                         "Vegetables", "Name of shopping list must be Vegetables")
+        self.assertEqual(
+            self.user.shoppinglists["HKUA452SA"].notify_date, "2017-08-27")
+
+        self.assertTrue(self.user.edit_shoppinglist(
+            "HKUA452SA", "Groceries", "2018-01-01"))
+        self.assertEqual(
+            self.user.shoppinglists["HKUA452SA"].name, "Groceries")
+        self.assertEqual(
+            self.user.shoppinglists["HKUA452SA"].notify_date, "2018-01-01")
+
+        self.user.edit_shoppinglist("HKUA452SA", "Clothes", "2017-09-10")
+        self.assertEqual(self.user.shoppinglists["HKUA452SA"].name,
+                         "Clothes", "The shopping list name has changed to clothes")
+        self.assertEqual(self.user.shoppinglists["HKUA452SA"].notify_date,
+                         "2017-09-10", "The notify date must be 2017-09-10")
+
+        # Trying to edit a non-existent shopping list should return False. In this case,
+        # We don't have a shopping list with an ID HshfnaA and neither do we have
+        # any list called beans.
+        self.assertFalse(self.user.edit_shoppinglist(
+            "HshfnaA", "Beans", "2018-01-01"))
+        self.assertEqual(self.user.shoppinglists["HKUA452SA"].name,
+                         "Clothes", "The name never changed from Clothes")
