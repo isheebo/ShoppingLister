@@ -66,3 +66,25 @@ def shopping_list():
         return redirect(url_for("lister.login"))
     user = app_instance.get_user(session["email"])
     return render_template("shopping_list.html", shoppinglists=user.shoppinglists, user=user)
+
+
+@lister.route("/add/list", methods=["POST"])
+def add_list():
+    """ Defines routes for adding new shopping lists to the application. """
+    if not session.get("logged_in"):
+        flash("Please first login!")
+        return redirect(url_for("lister.login"))
+    user = app_instance.get_user(session["email"])
+    name = request.form["name"]
+    notify_date = request.form["notify_date"]
+    if name and notify_date:
+        list_id = app_instance.generate_ID()
+        if user.create_shoppinglist(ShoppingList(list_id, name, notify_date)):
+            flash(f"A list with id  {list_id} has been created successfully")
+            return redirect(url_for("lister.shopping_list"))
+        flash(
+            f"A List with ID {list_id} already exists! You may use another ID or add new items to the existing one")
+    else:
+        flash("Both fields required: please try again")
+
+    return render_template("shopping_list.html", shoppinglists=user.shopping_lists, user=user)
