@@ -45,3 +45,18 @@ class TestShoppingList(unittest.TestCase):
         clothes.add_item(Item("3214", "Shirts", 30000, 3))
         self.assertEqual(len(clothes.items), 2, "Two item in clothes")
         self.shoppinglist.remove_item("3214")
+
+    def test_get_item(self):
+        clothes = ShoppingList("FE761", "Clothes", "2017-09-01")
+        clothes.add_item(Item("5262Y", "Jeans", 15000, 3))
+        self.assertEqual(len(clothes.items), 1, "One item in clothes")
+        clothes.add_item(Item("HF671", "Shirts", 30000, 3))
+
+        got_item = clothes.get_item("HF671")
+        self.assertEqual(got_item.price, 30000,
+                         "Price of an item must be 30000")
+        self.assertEqual(got_item.quantity, 3, "Quantity must be 3")
+        self.assertEqual(got_item.name, "Shirts", "Name must be Shirts")
+
+        no_item = clothes.get_item("HDR71S")
+        self.assertFalse(no_item, "No item available: supposed to return None")
