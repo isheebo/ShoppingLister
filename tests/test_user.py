@@ -15,3 +15,14 @@ class TestUser(unittest.TestCase):
                          "Email must be kedgar751@gmail.com")
         self.assertEqual(len(self.user.shoppinglists), 0,
                          "Length of shopping lists must be 0")
+
+    def test_user_create_shopping_list(self):
+        self.assertEqual(len(self.user.shoppinglists), 0,
+                         "No shopping lists created for this user yet")
+        self.user.create_shoppinglist(ShoppingList(
+            "HSTU728", "Vegetables", "2017-08-27"))
+        self.assertEqual(
+            self.user.shoppinglists["HSTU728"].notify_date, "2017-08-27",
+            "date must be 2017-08-27")
+        self.assertEqual(len(self.user.shoppinglists), 1,
+                         "One item created on the user profile")
