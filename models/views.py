@@ -32,3 +32,28 @@ def signup():
                 return redirect(url_for("lister.login"))
             error = f"User with email \"{email}\" already exists!!, try logging in"
     return render_template("signup.html", error=error)
+
+
+@lister.route("/login", methods=["GET", "POST"])
+def login():
+    """
+    Login is the entry point of the application. Without logging in,
+    the core functionality of this application remains hidden.
+    The route `/login` is used for this cause.
+    """
+
+    # if user is already logged in, redirect them to the home page.
+    if session.get("logged_in"):
+        return redirect(url_for("lister.shopping_list"))
+
+    if request.method == "POST":
+        email = request.form["email"]
+        password = request.form["password"]
+        if email and password:
+            if app_instance.login(email, password):
+                session["logged_in"] = True
+                session['email'] = email
+                return redirect(url_for("lister.shopping_list"))
+            error = "Wrong email or password. Try Again"
+            return render_template("login.html", error=error)
+    return render_template("login.html")
