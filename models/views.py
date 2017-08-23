@@ -148,3 +148,28 @@ def items(list_id):
     if not shoppinglist:
         return redirect(url_for("lister.shopping_list"))
     return render_template("items.html", user=user, shoppinglist=shoppinglist)
+
+
+@lister.route("/add/list/item/<list_id>", methods=["POST"])
+def add_item(list_id):
+    """ defines routes for adding an item to a list"""
+    if not session.get("logged_in"):
+        flash("Please first login!")
+        return redirect(url_for("lister.login"))
+    user = app_instance.get_user(session["email"])
+    shoppinglist = user.get_shoppinglist(list_id)
+
+    name = request.form["name"]
+    quantity = request.form["quantity"]
+    price = request.form["price"]
+    if not name or not quantity or not price:
+        flash("All fields required: please recheck your inputs")
+    else:
+
+        item = Item(app_instance.generate_ID(), name, price, quantity)
+        if shoppinglist.add_item(item):
+            flash(f"{name} added successfully")
+            return redirect(url_for("lister.items", list_id=list_id))
+        flash(
+            f"An item with name {name} already exists. Try editing it's price and quantity")
+    return render_template("items.html", user=user, shoppinglist=shoppinglist)
