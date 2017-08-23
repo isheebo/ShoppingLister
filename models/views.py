@@ -88,3 +88,29 @@ def add_list():
         flash("Both fields required: please try again")
 
     return render_template("shopping_list.html", shoppinglists=user.shopping_lists, user=user)
+
+
+@lister.route("/edit/list/<list_id>", methods=["POST", "GET"])
+def edit_list(list_id):
+    """ edit_list defines routes for editing shopping lists with in the application"""
+    if not session.get("logged_in"):
+        flash("Please first login!")
+        return redirect(url_for("lister.login"))
+
+    user = app_instance.get_user(session["email"])
+    shoppinglist = user.get_shoppinglist(list_id)
+    if not shoppinglist:
+        flash("That list doesn't exist")
+        return redirect(url_for("lister.shopping_list"))
+
+    if request.method == "POST":
+        name = request.form["name"]
+        notify_date = request.form["notify_date"]
+        if not name or not notify_date:
+            flash("Both fields required! Enter name and the notification date")
+        else:
+            if user.edit_shoppinglist(list_id, name, notify_date):
+                flash(f"The list has been edited successfully")
+                return redirect(url_for("lister.shopping_list"))
+            flash("Unable to edit list")
+    return render_template("edit_list.html", user=user, shoppinglist=shoppinglist)
