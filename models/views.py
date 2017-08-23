@@ -57,3 +57,12 @@ def login():
             error = "Wrong email or password. Try Again"
             return render_template("login.html", error=error)
     return render_template("login.html")
+
+
+@lister.route("/view/list")
+def shopping_list():
+    if not session.get("logged_in"):
+        flash("Please first login!")
+        return redirect(url_for("lister.login"))
+    user = app_instance.get_user(session["email"])
+    return render_template("shopping_list.html", shoppinglists=user.shoppinglists, user=user)
