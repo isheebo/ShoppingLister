@@ -1,5 +1,5 @@
 import unittest
-from models.item import Item
+from shoppinglister.models.item import Item
 
 
 class TestItem(unittest.TestCase):

@@ -1,6 +1,6 @@
 import unittest
-from models.user import User
-from models.shoppinglist import ShoppingList
+from shoppinglister.models.user import User
+from shoppinglister.models.shoppinglist import ShoppingList
 
 
 class TestUser(unittest.TestCase):

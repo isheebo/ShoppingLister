@@ -1,8 +1,8 @@
 import unittest
 
 from datetime import datetime
-from models.shoppinglist import ShoppingList
-from models.item import Item
+from shoppinglister.models.shoppinglist import ShoppingList
+from shoppinglister.models.item import Item
 
 
 class TestShoppingList(unittest.TestCase):
