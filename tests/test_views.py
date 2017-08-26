@@ -8,8 +8,6 @@ from flask import url_for, Response
 class ViewsTests(unittest.TestCase):
     """ Contains tests for the views """
 
-    view = shoppinglister.views
-
     def test_page_redirects_when_not_logged_in(self):
         """ Tests whether going to shopping_list without logging in
          redirects to the signin page """
@@ -27,6 +25,10 @@ class ViewsTests(unittest.TestCase):
             self.assertEqual(shoppinglister.views.logout().status_code, 302)
             self.assertEqual(shoppinglister.views.logout().location,
                              url_for('lister.signup'))
+
+    def test_sign_up_page_route(test):
+        with shoppinglister.app.test_request_context():
+            self.assertEqual(shoppinglister.views.signup().status_code, 200)
 
 
 if __name__ == '__main__':
