@@ -1,6 +1,6 @@
 .form-background {
 
-    background: rgba(255, 255, 255, .3)
+    background: #ffffff;
 
 }
 
@@ -25,6 +25,9 @@
 .items{
 
     margin-top: 100px;
+}
+body{
+    background-color: #ffffff;
 }
 
 

@@ -1,8 +1,8 @@
 from flask import Blueprint, request, flash, redirect, render_template, url_for, session
-from models.user import User
-from models.shoppinglist import ShoppingList
-from models.item import Item
-from models.mainapp import App
+from shoppinglister.models.user import User
+from shoppinglister.models.shoppinglist import ShoppingList
+from shoppinglister.models.item import Item
+from shoppinglister.models.mainapp import App
 
 lister = Blueprint("lister", __name__)
 
