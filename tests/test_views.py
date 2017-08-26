@@ -26,10 +26,6 @@ class ViewsTests(unittest.TestCase):
             self.assertEqual(shoppinglister.views.logout().location,
                              url_for('lister.signup'))
 
-    def test_sign_up_page_route(test):
-        with shoppinglister.app.test_request_context():
-            self.assertEqual(shoppinglister.views.signup().status_code, 200)
-
 
 if __name__ == '__main__':
     unittest.main()
