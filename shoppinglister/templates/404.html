@@ -5,12 +5,12 @@
 
     <nav class="navbar navbar-inverse fixed-top bg-faded navbar-toggleable-sm ">
         <div class="container">
-            <a href="{{ url_for("lister.shopping_list") }}" class="navbar-brand m-o align-content-end mr-auto">
+            <a href="{{ url_for('lister.shopping_list') }}" class="navbar-brand m-o align-content-end mr-auto">
                 Shopping Lister
             </a>
             <div class="navbar-nav ">
                 <a class="nav-item nav-link" href="#">{{ user.email }}</a>
-                <a class="nav-item nav-link" href="{{ url_for("lister.logout") }}">Log Out</a>
+                <a class="nav-item nav-link" href="{{ url_for('lister.logout') }}">Log Out</a>
             </div>
         </div>
     </nav>
@@ -23,7 +23,7 @@
                     <h3>Sorry, page not found.</h3>
                     <p>
                         Mehn!! Ever heard of the movie WrongTurn, you are now in one!! (kidding...)
-                        <a href="{{ url_for("lister.home") }}">let's get you back Home</a>
+                        <a href="{{ url_for('lister.home') }}">let's get you back Home</a>
                     </p>
                 </div>
             </div>

@@ -12,7 +12,7 @@
     <br>
     <div class="container">
         <!-- login form -->
-        <form action="{{ url_for("lister.login") }}" method="post">
+        <form action="{{ url_for('lister.login') }}" method="post">
             <div class="row">
                 <div class="container form-background card mt-5 col-6">
                     <h2 class="text-capitalize card-title">Sign In</h2>
@@ -31,7 +31,7 @@
 
                             <div class="form-group text-center">
                                 <button class="btn btn-info btn-block"> Log In </button>
-                                <a href="{{url_for("lister.signup")}}"> Back To Sign Up! </a>
+                                <a href="{{url_for('lister.signup')}}"> Back To Sign Up! </a>
                             </div>
                         </div>
                     </div>

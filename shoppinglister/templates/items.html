@@ -9,7 +9,7 @@
             </a>
             <div class="navbar-nav ">
                 <a class="nav-item nav-link" href="#">{{ user.email }}</a>
-                <a class="nav-item nav-link" href="{{ url_for("lister.logout") }}"> Log Out </a>
+                <a class="nav-item nav-link" href="{{ url_for('lister.logout') }}"> Log Out </a>
             </div>
         </div>
     </nav>
@@ -45,7 +45,7 @@
 
                     <!-- modal body-->
                     <div class="modal-body">
-                        <form class="form-horizontal" action="{{ url_for("lister.add_item", list_id=shoppinglist.list_id) }}" method="post">
+                        <form class="form-horizontal" action="{{ url_for('lister.add_item', list_id=shoppinglist.list_id) }}" method="post">
                             <div class="row">
                                 <div class="col">
 
