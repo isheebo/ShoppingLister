@@ -1,8 +1,6 @@
 import unittest
 import shoppinglister.views
-from shoppinglister.models.user import User
-from shoppinglister.views import lister
-from flask import url_for, Response
+from flask import url_for
 
 
 class ViewsTests(unittest.TestCase):

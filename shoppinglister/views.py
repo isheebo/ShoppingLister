@@ -80,7 +80,7 @@ def add_list():
     if name and notify_date:
         list_id = app_instance.generate_ID()
         if user.create_shoppinglist(ShoppingList(list_id, name, notify_date)):
-            flash(f"A list with id  {list_id} has been created successfully")
+            flash(f"A list with name  {name.capitalize()} has been created successfully")
             return redirect(url_for("lister.shopping_list"))
         flash(
             f"A List with ID {list_id} already exists! You may use another ID or add new items to the existing one")
