@@ -1,6 +1,4 @@
-import string
-import random
-
+import secrets
 
 class App:
     def __init__(self):
@@ -42,4 +40,4 @@ class App:
         return self.registered_users[email]
 
     def generate_ID(self):
-        return "".join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(10))
+        return secrets.token_urlsafe(10)
