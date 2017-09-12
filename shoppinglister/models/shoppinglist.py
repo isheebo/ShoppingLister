@@ -49,7 +49,7 @@ class ShoppingList:
         """ Edits an item's fields by using its name """
 
         for id, old_name in self.item_names.items():
-            """If we have beans, say on a particular shopping list, 
+            """If we have beans, say on a particular shopping list,
             we shouldn't edit another item to be called beans too. Just to keep the list clean"""
             if old_name == new_name.title() and item_id != id:
                 return False
