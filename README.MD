@@ -1,5 +1,6 @@
 # ShoppingLister v.1.0
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bcdefeb10ed841a581a168cff3326aeb)](https://www.codacy.com/app/isheebo/ShoppingLister?utm_source=github.com&utm_medium=referral&utm_content=isheebo/ShoppingLister&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/isheebo/ShoppingLister.svg?branch=master)](https://travis-ci.org/isheebo/ShoppingLister)
 [![Code Climate](https://codeclimate.com/github/isheebo/ShoppingLister/badges/gpa.svg)](https://codeclimate.com/github/isheebo/ShoppingLister)
 [![Issue Count](https://codeclimate.com/github/isheebo/ShoppingLister/badges/issue_count.svg)](https://codeclimate.com/github/isheebo/ShoppingLister)
