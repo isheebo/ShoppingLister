@@ -1,5 +1,6 @@
 import secrets
 
+
 class App:
     def __init__(self):
         self.registered_users = dict()
@@ -39,5 +40,6 @@ class App:
             return None
         return self.registered_users[email]
 
-    def generate_ID(self):
+    @classmethod
+    def generate_ID(cls):
         return secrets.token_urlsafe(10)
